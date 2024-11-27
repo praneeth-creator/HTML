@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teen Mental Health Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <span class="logo-icon">🌟</span>
+                <span class="logo-text">TeenMindMatters</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links">
+                <a href="#topics">Topics</a>
+                <a href="resources.html">Resources</a>
+                <a href="contact.html">Contact</a>
+                <a href="#self-help">Self-Help Tools</a>
+                
+                <a href="#emergency" class="emergency-link">Get Help Now</a>
+                
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Your Mental Health Matters</h1>
+            <p class="hero-subtitle">Understanding, supporting, and empowering teens through mental health education</p>
+            <div class="hero-cta">
+                <a href="#topics" class="primary-button">Learn More</a>
+                <a href="#emergency" class="secondary-button">Get Help</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="topics" class="topics-section">
+            <h2>Mental Health Topics</h2>
+            <div class="topic-grid">
+                <article  class="topic-card" data-topic="anxiety"  >
+                    <div class="topic-icon"> 😰</div>
+                    <h3>Anxiety</h3>
+                    <p>Understanding anxiety and coping strategies</p>
+                    <button class="learn-more-btn">Learn More</button>
+                </article>
+                <article class="topic-card" data-topic="depression">
+                    <div class="topic-icon">😔</div>
+                    <h3>Depression</h3>
+                    <p>Recognizing signs and seeking help</p>
+                    <button class="learn-more-btn">Learn More</button>
+                </article>
+                <article class="topic-card" data-topic="stress">
+                    <div class="topic-icon">🎯</div>
+                    <h3>Stress Management</h3>
+                    <p>Healthy ways to handle stress</p>
+                    <button class="learn-more-btn">Learn More</button>
+                </article>
+            </div>
+        </section>
+
+        <section id="self-help" class="tools-section">
+            <h2>Self-Help Tools</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <img src="moodtracker.jpeg" alt="" width="200px">
+                    <h3>Mood Tracker</h3>
+                    <div class="mood-tracker">
+                        <div class="mood-options">
+                            <button class="mood-btn" data-mood="great" >😊 </button>
+                            <button class="mood-btn" data-mood="good">🙂</button>
+                            <button class="mood-btn" data-mood="okay">😐</button>
+                            <button class="mood-btn" data-mood="bad">😔</button>
+                        </div>
+                        <div class="mood-log"></div>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <h3>Breathing Exercise</h3>
+                    <img src="breathing.jpeg" alt="" width="200px">
+                    <style>
+                        @keyframes breathe {
+                          0%, 100% { transform: scale(1); }
+                          50% { transform: scale(1.5); }
+                        }
+                        .breathing-circle {
+                          animation: breathe 8s infinite ease-in-out;
+                          animation-play-state: paused;
+                        }
+                        .breathing-circle.active {
+                          animation-play-state: running;
+                        }
+                        .text-gradient {
+                          background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+                          -webkit-background-clip: text;
+                          -webkit-text-fill-color: transparent;
+                        }
+                      </style>
+                    </head>
+                    <body class="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 text-gray-900 flex flex-col items-center justify-center p-4">
+                      <main class="max-w-2xl w-full text-center space-y-8">
+                        <h1 class="text-4xl font-bold text-gradient">Mindful Breathing</h1>
+                        
+                        <p class="text-lg text-gray-600">Follow the circle's rhythm: Inhale as it expands, exhale as it contracts</p>
+                        
+                        <div class="relative w-64 h-64 mx-auto">
+                          <!-- Outer glow -->
+                          <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 opacity-20 blur-xl"></div>
+                          
+                          <!-- Breathing circle -->
+                          <div id="breathingCircle" class="breathing-circle absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 opacity-30"></div>
+                          
+                          <!-- Center circle -->
+                          <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-32 h-32 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center shadow-lg">
+                              <span id="timerText" class="text-white text-2xl font-medium">4s</span>
+                            </div>
+                          </div>
+                        </div>
+                    
+                        <button
+                          onclick="toggleBreathing()"
+                          id="startButton"
+                          class="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                        >
+                          Start Breathing
+                        </button>
+                    
+                        <div class="mt-8 space-y-4">
+                          <p id="breathingState" class="text-lg text-gray-600">Press start to begin...</p>
+                          <div class="flex justify-center space-x-2">
+                            <span id="breathCount" class="text-sm text-gray-500">0 breaths completed</span>
+                          </div>
+                        </div>
+                      </main>
+                    
+                      <script>
+                        let isBreathing = false;
+                        let breathCount = 0;
+                        const circle = document.getElementById('breathingCircle');
+                        const button = document.getElementById('startButton');
+                        const stateText = document.getElementById('breathingState');
+                        const breathCounter = document.getElementById('breathCount');
+                        const timerText = document.getElementById('timerText');
+                        
+                        function toggleBreathing() {
+                          isBreathing = !isBreathing;
+                          button.textContent = isBreathing ? 'Pause' : 'Start Breathing';
+                          
+                          if (isBreathing) {
+                            circle.classList.add('active');
+                            updateBreathing();
+                          } else {
+                            circle.classList.remove('active');
+                            stateText.textContent = 'Paused';
+                          }
+                        }
+                    
+                        function updateBreathing() {
+                          if (!isBreathing) return;
+                          
+                          let phase = 0; // 0: inhale, 1: exhale
+                          const interval = setInterval(() => {
+                            if (!isBreathing) {
+                              clearInterval(interval);
+                              return;
+                            }
+                            
+                            phase = (phase + 1) % 2;
+                            if (phase === 0) {
+                              stateText.textContent = 'Breathe in...';
+                              timerText.textContent = '4s';
+                              breathCount++;
+                              breathCounter.textContent = `${breathCount} breaths completed`;
+                            } else {
+                              stateText.textContent = 'Breathe out...';
+                              timerText.textContent = '4s';
+                            }
+                          }, 4000);
+                        }
+                      </script>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <p></p>
+
+        <section id="emergency" class="emergency-section">
+            <h2>Need Help Now?</h2>
+            <div class="emergency-content">
+                <p>You're not alone. Help is available 24/7.</p>
+                <div class="emergency-contacts">
+                    <a href="tel:988" class="emergency-button">
+                        <span>📞</span> Call 988
+                    </a>
+                    <a href="sms:988" class="emergency-button">
+                        <span>💭</span> Text 988
+                    </a>
+                </div>
+                <p class="emergency-note">The 988 Suicide & Crisis Lifeline provides free, confidential support anytime.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#topics">Topics</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#self-help">Self-Help Tools</a></li>
+                    <li><a href="#emergency">Emergency Help</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Important Notice</h4>
+                <p class="footer-note">This website is for educational purposes only. Always seek professional help when needed.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="topicModal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</body>
+</html>
